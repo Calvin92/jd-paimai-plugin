@@ -104,7 +104,7 @@ $.extend(JDAuction.prototype,{
 				console.log("%c超出限制价格，停止抢拍","color: red");
 				clearInterval(this.timer)
 			}else {
-				console.log("%c当前价格:" + this.currentPrice + "--剩余时间：" + data.remainTime.substr(0,3) + '.' + data.remainTime.substr(3,4) + '秒' ,"color:blue");
+				console.log("%c当前价格:" + this.currentPrice + "--剩余时间：" + data.remainTime + '毫秒' ,"color:blue");
 				if(data.remainTime < (1100 + this.handleTime) ) {
 					this.bidIt();
 					clearInterval(this.timer);
