@@ -1,0 +1,29 @@
+{
+	"manifest_version" : 2,
+	"name" : "京东夺宝神器",
+	"description" : "夺宝神器，嘉伟出品",
+	"version" : "2.3",
+	"permissions" : [
+		"tabs",
+		"http://paimai.jd.com/*"
+	],
+	"icons" : {
+		"16":"imgs/16.png", 
+		"48":"imgs/48.png", 
+		"128":"imgs/128.png"
+	},
+	"web_accessible_resources" : [
+		"js/jquery.min.js", "js/jd.js"
+	],
+	"content_scripts" : [
+		{
+			"matches" : ["http://paimai.jd.com/1*","http://paimai.jd.com/2*","http://paimai.jd.com/3*","http://paimai.jd.com/9*"],
+			"css" : ["css/jd.css"],
+			"js" : ["js/jquery.min.js", "js/jd.js"]
+		}
+	],
+	"browser_action" : {
+		"default_icon" : "imgs/128.png",
+		"default_title" : "京东夺宝神器"
+	}
+}
