@@ -89,7 +89,7 @@ $.extend(JDAuction.prototype,{
 		this.addNum.attr("disabled","disabled");
 		this.timer = setInterval(function() {
 			_this.manualAuction();
-		},180);
+		},150);
 	},
 	querySuccess: function(data) {
 		var max_price = this.maxPrice.val();
@@ -105,7 +105,7 @@ $.extend(JDAuction.prototype,{
 				clearInterval(this.timer)
 			}else {
 				console.log("%c当前价格:" + this.currentPrice + "--剩余时间：" + data.remainTime.substr(0,3) + '.' + data.remainTime.substr(3,4) + '秒' ,"color:blue");
-				if(data.remainTime < (1020 + this.handleTime) ) {
+				if(data.remainTime < (1100 + this.handleTime) ) {
 					this.bidIt();
 					clearInterval(this.timer);
 				}
