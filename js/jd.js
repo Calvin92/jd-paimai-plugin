@@ -20,8 +20,8 @@ var JDAuction = function() {
 	this.paimaiId     = /[\d]{8,}/.exec(document.location.href)[0];
 	this.skuId		  = $("#sku").val();
 	this.t 			  = Date.parse(new Date());
-	this.queryAPI 	  = "http://paimai.jd.com/json/current/englishquery?start=0&end=9&";
-	this.bidAPI		  = "http://paimai.jd.com/services/bid.action?proxyFlag=0&bidSource=0&";
+	this.queryAPI 	  = "/json/current/englishquery?start=0&end=9&";
+	this.bidAPI		  = "/services/bid.action?proxyFlag=0&bidSource=0&";
 	this.aboutme 	  = "----京东夺宝神器第一个免费版本,具体操作见界面即可---\n" +
 						"--加价幅度为最后出价时在原有的最高价上加的价格，最小为1，默认是3\n" +
 						"动态调节时间可根据自己的网速进行调整，如果默认的时间导致最后出价过晚，没能出价的话，请调大一点这个时间，0-500毫秒，默认是0 \n" +

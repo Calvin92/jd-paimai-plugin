@@ -5,7 +5,7 @@
 	"version" : "2.3",
 	"permissions" : [
 		"tabs",
-		"http://paimai.jd.com/*"
+		"http://dbitem.jd.com/*"
 	],
 	"icons" : {
 		"16":"imgs/16.png", 
@@ -17,7 +17,7 @@
 	],
 	"content_scripts" : [
 		{
-			"matches" : ["http://paimai.jd.com/1*","http://paimai.jd.com/2*","http://paimai.jd.com/3*","http://paimai.jd.com/9*"],
+			"matches" : ["http://dbitem.jd.com/1*","http://dbitem.jd.com/2*","http://dbitem.jd.com/3*","http://dbitem.jd.com/9*"],
 			"css" : ["css/jd.css"],
 			"js" : ["js/jquery.min.js", "js/jd.js"]
 		}
