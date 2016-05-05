@@ -17,7 +17,7 @@
 	],
 	"content_scripts" : [
 		{
-			"matches" : ["http://dbitem.jd.com/1*","http://dbitem.jd.com/2*","http://dbitem.jd.com/3*","http://dbitem.jd.com/9*"],
+			"matches" : ["http://dbditem.jd.com/*"],
 			"css" : ["css/jd.css"],
 			"js" : ["js/jquery.min.js", "js/jd.js"]
 		}
