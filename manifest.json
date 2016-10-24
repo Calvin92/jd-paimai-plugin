@@ -5,7 +5,7 @@
 	"version" : "2.3",
 	"permissions" : [
 		"tabs",
-		"http://dbitem.jd.com/*"
+		"https://dbditem.jd.com/*"
 	],
 	"icons" : {
 		"16":"imgs/16.png", 
@@ -17,7 +17,7 @@
 	],
 	"content_scripts" : [
 		{
-			"matches" : ["http://dbditem.jd.com/*"],
+			"matches" : ["https://dbditem.jd.com/*"],
 			"css" : ["css/jd.css"],
 			"js" : ["js/jquery.min.js", "js/jd.js"]
 		}
