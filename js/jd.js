@@ -1,8 +1,8 @@
 /**
-  *@author:jiawei.ruan
-  *E-mail:276807334@qq.com
-  *QQ:276807334
-  *wechat:kiss_276807334
+  * @author:jiawei.ruan
+  * E-mail:276807334@qq.com
+  * QQ:276807334
+  * wechat:kiss_276807334
 */
 
 var JDAuction = function () {
@@ -53,7 +53,11 @@ $.extend(JDAuction.prototype, {
 		$("#qp_btn_auto").on("click", $.proxy(this.autoAuction, this));
 	},
 	handleLimitPrice: function () {
-		this.priceLimit = parseInt(/\d{1,9}/.exec(/封顶价：¥[\d]{1,9}/.exec(this.originPrice)[0])[0] * 1 * 0.7, 10) || "暂无报价";
+		try {
+			this.priceLimit = parseInt(/\d{1,9}/.exec(/封顶价：¥[\d]{1,9}/.exec(this.originPrice)[0])[0] * 1 * 0.7, 10);
+		} catch (e) {
+			this.priceLimit = "暂无报价";
+		}
 		$('#qp_price_limit').val(this.priceLimit);
 		this.maxPrice.val(this.priceLimit);
 		this.addNum.val("3");
@@ -77,7 +81,7 @@ $.extend(JDAuction.prototype, {
 		this.autoFlag = true;
 		this.handleTime = isNaN(parseInt($('#qp_handle_time'), 10)) ? 0 : parseInt($('#qp_handle_time'), 10);
 		if (this.handleTime > 500) this.handleTime = 500;
-		clearInterval(this.timer); //防止启动多个计时器
+		window.clearInterval(this.timer); //防止启动多个计时器
 		if (this.maxPrice.val().trim() === "" || isNaN(this.maxPrice.val())) {
 			alert("最高价输入不合法，请输入数字！");
 			return;
@@ -87,7 +91,7 @@ $.extend(JDAuction.prototype, {
 		}
 		this.maxPrice.attr("disabled", "disabled");
 		this.addNum.attr("disabled", "disabled");
-		this.timer = setInterval(function () {
+		this.timer = window.setInterval(function () {
 			_this.manualAuction();
 		}, 150);
 	},
@@ -96,21 +100,29 @@ $.extend(JDAuction.prototype, {
 		this.lastBidUser = data.bidList.length !== 0 ? data.bidList[data.bidList.length - 1].username.substr(4) : "";
 		if (this.myUserName.indexOf(this.lastBidUser) !== -1) {
 			console.log("%c目前还没有用户跟您抢这个宝贝", "color:orange");
-			return;
+			return window.clearInterval(this.timer);
 		}
 		this.currentPrice = data.currentPrice;
 		if (this.autoFlag) {
 			if (max_price < parseInt(this.currentPrice, 10)) {
 				console.log("%c超出限制价格，停止抢拍", "color: red");
-				clearInterval(this.timer)
+				window.clearInterval(this.timer)
 			} else {
 				console.log("%c当前价格:" + this.currentPrice + "--剩余时间：" + data.remainTime.substr(0, data.remainTime.length - 3) + '.' + data.remainTime.substr(data.remainTime.length - 3) + '秒', "color:blue");
-				if (data.remainTime < (1100 + this.handleTime)) {
+				if (data.remainTime < (1200 + this.handleTime)) {
 					this.bidIt();
-					clearInterval(this.timer);
+					return window.clearInterval(this.timer);
+				}
+
+				// 频繁请求会导致被加入接口黑名单（大约1-2小时？），所请求的当前价将会是100万
+				if (data.remainTime > 2200) {
+					window.clearInterval(this.timer);
+					window.setTimeout(this.manualAuction.bind(this), 1000);
+				} else {
+					this.autoAuction();
 				}
 			}
-		} else if (!this.autoFlag) {
+		} else {
 			this.bidIt();
 		}
 	},
