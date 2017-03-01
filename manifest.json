@@ -20,7 +20,7 @@
 		{
 			"matches" : ["http://dbditem.jd.com/*", "https://dbditem.jd.com/*"],
 			"css" : ["css/jd.css"],
-			"js" : ["js/jquery.min.js", "js/jd.js"]
+			"js" : ["js/jd.js"]
 		}
 	],
 	"browser_action" : {
